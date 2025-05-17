@@ -19,9 +19,9 @@ document.addEventListener('click', (e) => {
 
   if (posX < 0) {
     posX = 0;
-  } else if (posX + spider.clientHeight >= rect.width - borderRightWidth) {
+  } else if (posX + spider.clientWidth >= rect.width - borderRightWidth) {
     posX =
-      rect.width - spider.clientHeight - borderLeftWidth - borderRightWidth;
+      rect.width - spider.clientWidth - borderLeftWidth - borderRightWidth;
   }
 
   let posY = e.clientY - rect.top - borderTopWidth - spiderHalfHeight;
