@@ -2,7 +2,10 @@
 
 document.addEventListener('click', (e) => {
   const wall = document.querySelector('.wall');
-  const borderWidth = wall.clientLeft;
+  const borderLeftWidth = parseInt(getComputedStyle(wall).borderLeftWidth);
+  const borderRightWidth = parseInt(getComputedStyle(wall).borderRightWidth);
+  const borderTopWidth = parseInt(getComputedStyle(wall).borderTopWidth);
+  const borderBottomWidth = parseInt(getComputedStyle(wall).borderBottomWidth);
   const rect = wall.getBoundingClientRect();
   const spider = document.querySelector('.spider');
   const spiderHalfWidth = spider.clientWidth / 2;
@@ -12,20 +15,22 @@ document.addEventListener('click', (e) => {
     return;
   }
 
-  let posX = e.clientX - rect.left - borderWidth - spiderHalfWidth;
+  let posX = e.clientX - rect.left - borderLeftWidth - spiderHalfWidth;
 
   if (posX < 0) {
     posX = 0;
-  } else if (posX + spider.clientHeight >= rect.width - borderWidth) {
-    posX = rect.width - spider.clientHeight - borderWidth * 2;
+  } else if (posX + spider.clientHeight >= rect.width - borderRightWidth) {
+    posX =
+      rect.width - spider.clientHeight - borderLeftWidth - borderRightWidth;
   }
 
-  let posY = e.clientY - rect.top - borderWidth - spiderHalfHeight;
+  let posY = e.clientY - rect.top - borderTopWidth - spiderHalfHeight;
 
   if (posY < 0) {
     posY = 0;
-  } else if (posY + spider.clientHeight >= rect.height - borderWidth) {
-    posY = rect.height - spider.clientHeight - borderWidth * 2;
+  } else if (posY + spider.clientHeight >= rect.height - borderBottomWidth) {
+    posY =
+      rect.height - spider.clientHeight - borderTopWidth - borderBottomWidth;
   }
 
   spider.style.left = `${posX}px`;
